@@ -76,32 +76,71 @@ toolkit:
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - xcresult_path: $BITRISE_XCRESULT_PATH
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
+      title: "xcresult path"
+      summary:
       description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
+        Description
       is_expand: true
       is_required: true
       value_options: []
 
-  - xcresult_path: $BITRISE_XCRESULT_PATH
+  - target:
     opts:
-      title: ""
+      title: "Target"
       summary:
       description: |
         Description
-      is_expand: false
+      is_expand: true
       is_required: true
-      value_options: []
+      value_options: [ ]
+
+  - exclude_files:
+    opts:
+      title: "Exclude Swift Files"
+      summary: Specify Swift files to exclude from code coverage calculation.
+      description: |
+        Description
+      is_expand: true
+      is_required: false
+      value_options: [ ]
+
+  - exclude_config_path:
+    opts:
+      title: Exclude Config File Path
+      summary: A path to the yaml configuration file specifying which Swift files to exclude from code coverage calculation.
+      description: |
+        Description
+      is_expand: true
+      is_required: false
+      value_options: [ ]
+
+  - coverage_json_path:
+    opts:
+      title: Coverage JSON Path
+      summary: The file path for the coverage output from .xcresult
+      description: |
+        Description
+      is_expand: true
+      is_required: false
+      value_options: [ ]
+
+  - export_to_deploy: "yes"
+    opts:
+      title: Export to BITRISE_DEPLOY_DIR
+      summary: Exports Coverage JSON Output to BITRISE_DEPLOY_DIR
+      description: |-
+        If enabled
+      value_options:
+        - "yes"
+        - "no"
+
 
 outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - XCCOV_PROC_COVERAGE_JSON_PATH:
     opts:
-      title: "Example Step Output"
+      title: The Path of Coverage JSON File
       summary: Summary. No more than 2-3 sentences.
       description: |
         Description of this output.

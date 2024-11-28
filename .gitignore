@@ -3,3 +3,7 @@
 .vscode
 README.md.backup
 _tmp/
+.DS_Store
+testdata/sample.xcresult
+testdata/sample-converage.json
+*.json

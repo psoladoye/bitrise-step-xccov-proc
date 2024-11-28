@@ -75,6 +75,7 @@ and recalculates coverage metrics for the specified target.`,
 }
 
 func init() {
+	log.Println("executing ==>  init [process]")
 	// Add the process command to the root command
 	rootCmd.AddCommand(processCmd)
 
