@@ -11,7 +11,7 @@ type ExclusionConfig struct {
 	Exclude []string `yaml:"exclude"`
 }
 
-// ParseExclusionConfig parses a YAML config file for exclusions
+// ParseExclusionConfig reads and parses an exclusion config YAML file, returning a set of excluded paths or an error.
 func ParseExclusionConfig(configPath string) (map[string]struct{}, error) {
 	file, err := os.ReadFile(configPath)
 	if err != nil {

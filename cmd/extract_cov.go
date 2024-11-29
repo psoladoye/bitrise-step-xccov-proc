@@ -8,9 +8,13 @@ import (
 	"os"
 )
 
+// xcresultPath is a string variable that holds the path to the .xcresult file used for extracting coverage data.
 var xcresultPath string
+
+// outputCoveragePath defines the path where the generated coverage.json file will be saved.
 var outputCoveragePath string
 
+// extractCovCmd is a Cobra command that extracts coverage data from an .xcresult file and outputs it as a coverage.json file.
 var extractCovCmd = &cobra.Command{
 	Use:   "extract",
 	Short: "Extract coverage data from an Xcode result bundle",
@@ -33,6 +37,7 @@ and generates a coverage.json file.`,
 	},
 }
 
+// init sets up the extractCovCmd by adding it to rootCmd and defines required flags for extracting coverage data.
 func init() {
 	rootCmd.AddCommand(extractCovCmd)
 
