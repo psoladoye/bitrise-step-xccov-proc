@@ -146,3 +146,12 @@ outputs:
         Description of this output.
 
         Can be Markdown formatted text.
+
+  - XCCOV_PROC_COVERAGE_VALUE:
+    opts:
+      title: The Path of Coverage JSON File
+      summary: Summary. No more than 2-3 sentences.
+      description: |
+        Description of this output.
+
+        Can be Markdown formatted text.
