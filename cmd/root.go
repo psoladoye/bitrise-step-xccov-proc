@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Root command: the base command for the CLI
+// rootCmd is the main command for the xccov-proc CLI that manages subcommands and handles their execution.
 var rootCmd = &cobra.Command{
 	Use:   "xccov-proc",
 	Short: "A tool to process xcode coverage files with customization options",
@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-// Execute starts the CLI application
+// Execute runs the main command execution logic, deciding between Bitrise or standard CLI mode based on environment variables.
 func Execute() {
 	// Check for Bitrise step context
 	log.Println("executing => Execute [root]")
@@ -35,14 +35,12 @@ func Execute() {
 	}
 }
 
+// init is the initialization function for the package, used to set up or configure initial settings or states.
 func init() {
 	log.Println("executing => init [root]")
 }
 
-func initConfig() {
-	log.Println("executing => initConfig")
-}
-
+// executeBitriseMode configures and executes commands for Bitrise CI based on environment variables for code coverage.
 func executeBitriseMode() {
 	log.Println("running in Bitrise step mode [root]")
 	xcresultPath := os.Getenv("xcresult_path")

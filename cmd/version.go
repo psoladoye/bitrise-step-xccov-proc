@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// versionCmd is a Cobra command that outputs the version number of the xccov-proc CLI tool.
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version number of xccov-proc",
@@ -14,6 +15,7 @@ var versionCmd = &cobra.Command{
 	},
 }
 
+// init adds the versionCmd to the rootCmd, ensuring the version information is included in the command-line interface.
 func init() {
 	rootCmd.AddCommand(versionCmd)
 }

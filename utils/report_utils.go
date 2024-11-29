@@ -30,7 +30,12 @@ type CoverageReport struct {
 	Targets []Target `json:"targets"`
 }
 
-// ProcessCoverage handles the coverage processing logic
+// ProcessCoverage processes a coverage report file, filters out specified files, and recalculates the line coverage
+// for a given target. It returns the updated coverage percentage and an error if the processing fails.
+// Parameters:
+// - filePath: The path to the coverage report file.
+// - target: The target within the coverage report to process.
+// - excludeFiles: A map of file names to be excluded from the coverage calculation.
 func ProcessCoverage(filePath, target string, excludeFiles map[string]struct{}) (float64, error) {
 	var coverage = 0.0
 
@@ -86,7 +91,8 @@ func ProcessCoverage(filePath, target string, excludeFiles map[string]struct{}) 
 	return coverage, nil
 }
 
-// GenerateCoverageFile runs the xcrun xccov command to generate coverage.json
+// GenerateCoverageFile generates a coverage report from an Xcode result bundle and writes it to the specified output file.
+// Takes the path to the xcresult bundle and the desired output file path as arguments. Returns an error if the process fails.
 func GenerateCoverageFile(xcresultPath, outputPath string) error {
 	fmt.Println("Generating coverage report...")
 	cmd := exec.Command("xcrun", "xccov", "view", "--report", "--json", xcresultPath)

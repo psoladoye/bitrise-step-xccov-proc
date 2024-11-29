@@ -6,13 +6,19 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"os"
-	"os/exec"
 )
 
+// target specifies the name of the target to process for coverage metrics recalculation.
 var target string
+
+// excludeFiles is a slice of strings representing file paths to be excluded from coverage processing.
 var excludeFiles []string
+
+// excludeConfigPath specifies the path to a YAML configuration file containing paths that should be excluded from processing.
 var excludeConfigPath string
 
+// processCmd is a Cobra command used to process and filter an Xcode coverage report, recalculating coverage metrics.
+// The command requires the --xcresult-path and --target flags to specify the path of the Xcode coverage file and the target.
 var processCmd = &cobra.Command{
 	Use:   "process",
 	Short: "Process and filter an Xcode coverage report",
@@ -64,16 +70,18 @@ and recalculates coverage metrics for the specified target.`,
 			log.Fatalf("Failed to process coverage file: %v\n", err)
 		}
 
-		cmdLog, err := exec.Command("bitrise", "envman", "add", "--key", "CODE_COVERAGE", "--value", fmt.Sprintf("%f", coverage)).CombinedOutput()
+		err = utils.ExportCoverageAsEnv(coverage)
 		if err != nil {
-			fmt.Printf("Failed to expose output with envman, error: %#v | output: %s", err, cmdLog)
-			os.Exit(1)
+			log.Fatalf("Failed to export coverage as env vars: %v\n", err)
 		}
 
 		fmt.Printf("Coverage processing completed successfully. Processed file: %s\n", outputPath)
 	},
 }
 
+// init initializes the command-line interface by adding the 'process' command to the root command.
+// It sets up flags for the process command allowing users to specify target, exclude files,
+// exclude configuration path, path to the .xcresult file, and an optional output path for the coverage file.
 func init() {
 	log.Println("executing ==>  init [process]")
 	// Add the process command to the root command
